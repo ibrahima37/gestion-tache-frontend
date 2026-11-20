@@ -1,0 +1,4 @@
+export enum TypeTache{
+    ATTRIBUEE = 'ATTRIBUEE',
+    ACTIVITE_DECLAREE = 'ACTIVITE_DECLAREE'
+}

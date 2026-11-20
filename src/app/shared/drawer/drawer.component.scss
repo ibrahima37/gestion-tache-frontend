@@ -1,0 +1,112 @@
+.drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 260px;
+  height: 100vh;
+  background: linear-gradient(135deg, #020617 0%, #1e1b4b 45%, #0c4a6e 100%);
+  color: #fff;
+  z-index: 200;
+  padding: 16px 20px;
+  box-shadow: 5px 0 20px rgba(0, 0, 0, 0.4);
+  animation: slideIn 0.25s ease;
+  overflow-y: auto;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+// Logo réduit
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 12px;
+
+  img {
+    width: 60px;      // taille réduite, change ici si tu veux 50px ou 80px
+    height: 60px;
+    object-fit: cover; // ne déforme pas l'image
+    border-radius: 50%; // rond, enlève cette ligne si tu veux carré
+    border: 2px solid rgba(255, 255, 255, 0.2);
+  }
+}
+
+.drawer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+  h3 {
+    margin: 0;
+    font-size: 18px;
+  }
+
+  button {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+  }
+}
+
+nav a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 10px;
+  color: #e2e8f0;
+  text-decoration: none;
+  margin-bottom: 4px;
+  cursor: pointer;
+  font-size: 15px;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  &.active {
+    background: linear-gradient(90deg, #06b6d4, #a855f7, #ec4899);
+    color: #fff;
+  }
+}
+
+.menu-group {
+  .arrow {
+    margin-left: auto;
+    font-size: 11px;
+    opacity: 0.7;
+  }
+}
+
+.submenu {
+  margin-left: 20px;
+  margin-bottom: 8px;
+  border-left: 2px solid rgba(255, 255, 255, 0.15);
+  padding-left: 8px;
+
+  a {
+    font-size: 14px;
+    padding: 9px 12px;
+    color: #cbd5e1;
+
+    &:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.08);
+    }
+  }
+}

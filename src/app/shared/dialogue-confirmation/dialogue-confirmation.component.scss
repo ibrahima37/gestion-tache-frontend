@@ -1,0 +1,33 @@
+.modal-content {
+  border-radius: 10px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-header {
+  border-bottom: none;
+  background-color: #ffc107; // accent jaune
+  color: #212529;
+}
+
+.modal-footer {
+  border-top: none;
+}
+
+.btn-danger {
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.btn-danger:hover {
+  background-color: #dc3545; // rouge Bootstrap
+  color: #fff;
+}
+
+.btn-secondary {
+  font-weight: 500;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}

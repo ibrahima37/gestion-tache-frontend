@@ -1,0 +1,19 @@
+<div class="appbar">
+  <div class="left">
+    <button (click)="toggleDrawer()" class="menu-button">
+      <i class="bi bi-list"></i> Menu
+    </button>
+    <h1>GESTION ADMINISTRATIVE</h1>
+  </div>
+
+  <div class="right">
+    <span class="username">{{ username }}</span>
+    <button (click)="logout()" class="logout-btn">
+      <i class="bi bi-box-arrow-right"></i>
+    </button>
+  </div>
+</div>
+
+<!-- Le drawer + le fond sombre quand il est ouvert -->
+<div class="overlay" *ngIf="isDrawerOpen" (click)="closeDrawer()"></div>
+<app-drawer *ngIf="isDrawerOpen" (close)="closeDrawer()"></app-drawer>

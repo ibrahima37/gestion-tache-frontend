@@ -1,0 +1,56 @@
+<div class="personne-container">
+  <table class="personne-table">
+    <thead>
+      <tr>
+        <th>Prénoms</th>
+        <th>Nom</th>
+        <th>Email</th>
+        <th>Téléphone</th>
+        <th>Adresse</th>
+        <th>Date inscription</th>
+        <th>Statut</th>
+        <th>Profils</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let personne of personnes"
+          (click)="selectedPersonne(personne.id)"
+          [class.selected]="personne.id === selectedPersonneId"
+          class="personne-row">
+
+        <td>{{ personne.prenoms }}</td>
+        <td>{{ personne.nom }}</td>
+        <td [title]="personne.email">{{ personne.email }}</td>
+        <td>{{ personne.telephone || '-' }}</td>
+        <td [title]="personne.adresse">{{ personne.adresse || '-' }}</td>
+        <td>{{ personne.dateInscription | date:'dd/MM/yyyy' }}</td>
+        <td>
+          <span class="badge" [class.actif]="personne.statut" [class.inactif]="!personne.statut">
+            {{ personne.statut ? 'Actif' : 'Inactif' }}
+          </span>
+        </td>
+        <td>
+          <span *ngFor="let profil of personne.profils; let last = last">
+            {{ profil.nom }}{{ !last ? ', ' : '' }}
+          </span>
+          <span *ngIf="!personne.profils?.length">-</span>
+        </td>
+        <td>
+          <div class="actions-content" (click)="$event.stopPropagation()">
+            <button class="btn-view" (click)="selectedPersonne(personne.id)" title="Voir">
+              <i class="bi bi-eye"></i>
+            </button>
+            <button class="btn-delete" (click)="demanderSuppression(personne)" title="Supprimer">
+              <i class="bi bi-trash"></i>
+            </button>
+          </div>
+        </td>
+      </tr>
+
+      <tr *ngIf="personnes.length === 0">
+        <td colspan="9" class="empty">Aucune personne trouvée</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,134 @@
+<!-- CARTES STATUT (tu gardes ton code) -->
+<div class="statut-container">
+  <div *ngFor="let statut of statuts" class="statut-card"
+    [class.active]="statutSelectionne === statut"
+    (click)="choisirStatut(statut)">
+    <span class="nombre">{{ compter(statut) }}</span>
+    <span class="label">{{ statut }}</span>
+  </div>
+</div>
+
+<!-- FILTRES -->
+<div class="filtres">
+  <input type="text" [(ngModel)]="recherche" placeholder="🔍 Rechercher une tâche...">
+
+  <!-- UTILISATEUR -->
+  <select [(ngModel)]="filtreUtilisateur">
+    <option value="">Tous les utilisateurs</option>
+    <option *ngFor="let u of personne" [value]="u.id">
+      {{ u.prenoms }} {{ u.nom }}
+    </option>
+  </select>
+
+  <!-- TYPE -->
+  <select [(ngModel)]="filtreType">
+    <option value="">Tous les types</option>
+    <option *ngFor="let t of typeTaches" [value]="t">{{ t }}</option>
+  </select>
+
+  <!-- PRIORITE / ETAT -->
+  <select [(ngModel)]="filtrePriorite">
+    <option value="">Toutes les priorités</option>
+    <option *ngFor="let p of priorites" [value]="p">{{ p }}</option>
+  </select>
+
+  <button (click)="resetFiltres()">Réinitialiser</button>
+</div>
+
+<!-- TABLEAU -->
+<div class="table-container">
+  <table>
+    <thead>
+      <tr>
+        <th>Titre</th>
+        <th>Description</th>
+        <th>Utilisateur</th>
+        <th>Type</th>
+        <th>Statut</th>
+        <th>Priorité</th>
+        <th>Date Début</th>
+        <th>Date Fin</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let t of tachesFiltrees">
+        <td><strong>{{ t.titre }}</strong></td>
+        <td>{{ t.description }}</td>
+        <td>{{ getNomUtilisateur(t) }}</td>
+        <td><span class="badge type">{{ t.typeTache }}</span></td>
+        <td>
+          <span class="badge" [ngClass]="t.statut">
+            {{ t.statut }}
+          </span>
+        </td>
+        <td>
+          <span class="badge" [ngClass]="t.priorite">
+            {{ t.priorite }}
+          </span>
+        </td>
+        <td>{{ t.dateDebut | date:'dd/MM/yyyy HH:mm' }}</td>
+        <td>{{ t.dateFin | date:'dd/MM/yyyy HH:mm' }}</td>
+        <td>
+          <div class="actions-content" (click)="$event.stopPropagation()">
+            <button class="btn-view" (click)="selectTache(t.id)" title="Voir">
+              <i class="bi bi-eye"></i>
+            </button>
+            <button class="btn-assign" (click)="ouvrirModalAttribution(t)" title="Attribuer">
+              <i class="bi bi-person-check"></i>
+            </button>
+            <button class="btn-delete" (click)="demanderSuppression(t)" title="Supprimer">
+              <i class="bi bi-trash"></i>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p *ngIf="tachesFiltrees.length === 0" class="empty">
+    Aucune tâche trouvée avec ces filtres.
+  </p>
+</div>
+
+<!-- MODALE ATTRIBUTION -->
+<div class="modal-overlay" *ngIf="tacheAAttribuer" (click)="fermerModalAttribution()">
+  <div class="modal-card" (click)="$event.stopPropagation()">
+    <div class="modal-icon assign">
+      <i class="bi bi-person-check"></i>
+    </div>
+    <h3>Attribuer la tâche</h3>
+    <p>Attribuer <b>{{ tacheAAttribuer.titre }}</b> à :</p>
+
+    <select [(ngModel)]="personneSelectionnee" class="select-modal">
+      <option value="">-- Choisir une personne --</option>
+      <option *ngFor="let p of personne" [value]="p.id">
+        {{ p.prenoms }} {{ p.nom }}
+      </option>
+    </select>
+
+    <div class="modal-actions">
+      <button class="btn-cancel" (click)="fermerModalAttribution()">Annuler</button>
+      <button class="btn-confirm-assign"
+        (click)="confirmerAttribution()"
+        [disabled]="!personneSelectionnee">
+        Attribuer
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- MODALE SUPPRESSION - C'EST CELLE QUI MANQUAIT -->
+<div class="modal-overlay" *ngIf="showConfirm" (click)="annulerSuppression()">
+  <div class="modal-card" (click)="$event.stopPropagation()">
+    <div class="modal-icon" style="background: rgba(244,63,94,0.15); border-color: rgba(244,63,94,0.4); color: #fda4af;">
+      <i class="bi bi-trash"></i>
+    </div>
+    <h3>Supprimer la tâche ?</h3>
+    <p>Voulez-vous vraiment supprimer <b>{{ tacheASupprimer?.titre }}</b> ?</p>
+    <div class="modal-actions">
+      <button class="btn-cancel" (click)="annulerSuppression()">Annuler</button>
+      <button class="btn-confirm-assign" style="background: #f43f5e;" (click)="confirmerSuppression()">Supprimer</button>
+    </div>
+  </div>
+</div>

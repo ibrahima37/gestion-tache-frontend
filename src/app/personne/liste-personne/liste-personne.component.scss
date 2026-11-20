@@ -1,0 +1,118 @@
+// ===== TABLEAU PERSONNE =====
+.personne-container {
+  overflow-x: auto;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(18px);
+  padding: 6px;
+}
+
+.personne-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+
+  th {
+    padding: 14px 16px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    white-space: nowrap;
+  }
+
+  td {
+    padding: 13px 16px;
+    color: #fff;
+    font-size: 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    vertical-align: middle;
+    max-width: 220px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    // Email / Adresse peuvent être longs
+    &:nth-child(3), &:nth-child(5) {
+      max-width: 260px;
+    }
+  }
+
+  tbody tr {
+    cursor: pointer;
+    transition: background 0.15s;
+
+    &:hover { background: rgba(255, 255, 255, 0.08); }
+    &:last-child td { border-bottom: none; }
+
+    &.selected {
+      background: linear-gradient(90deg, rgba(6,182,212,0.18), rgba(168,85,247,0.18), rgba(236,72,153,0.18));
+      box-shadow: inset 3px 0 0 #a855f7;
+    }
+  }
+}
+
+// ===== BADGES PERSONNE - Actif / Inactif =====
+.badge {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  border: 1px solid transparent;
+
+  &.actif {
+    background: rgba(34, 197, 94, 0.15);
+    border-color: rgba(34, 197, 94, 0.4);
+    color: #bbf7d0;
+  }
+
+  &.inactif {
+    background: rgba(244, 63, 94, 0.15);
+    border-color: rgba(244, 63, 94, 0.4);
+    color: #fda4af;
+  }
+}
+
+// ===== ACTIONS =====
+.actions-content {
+  display: flex;
+  gap: 10px;
+  white-space: nowrap;
+
+  button {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    color: #fff;
+    transition: transform 0.15s;
+
+    &:hover { transform: scale(1.1); }
+  }
+
+  .btn-view { background: rgba(34, 211, 238, 0.25); }
+  .btn-delete { background: rgba(244, 63, 94, 0.25); }
+}
+
+.empty {
+  padding: 30px 0;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .personne-table {
+    td, th { padding: 10px 12px; font-size: 13px; }
+  }
+}

@@ -1,0 +1,29 @@
+<div class="auth-page">
+  <div class="auth-card">
+    <div class="avatar"><span>👥</span></div>
+
+    <div class="tabs">
+      <a routerLink="/login" routerLinkActive="active">Login</a>
+      <a routerLink="/register" routerLinkActive="active">Register</a>
+    </div>
+
+    <form (ngSubmit)="onLogin()" class="form">
+      <div class="field">
+        <span class="icon"><i class="bi bi-envelope"></i></span>
+        <input type="email" placeholder="S'aisissez votre mail" name="email"
+               [(ngModel)]="loginRequest.email" required />
+      </div>
+      <div class="field">
+        <span class="icon"><i class="bi bi-lock"></i></span>
+        <input type="motDePasse" placeholder="S'aisissez votre motDePasse" name="motDePasse"
+               [(ngModel)]="loginRequest.motDePasse" required />
+      </div>
+
+      <button type="submit" class="btn-gradient">Login</button>
+      <p class="error" *ngIf="error">{{ error }}</p>
+
+      <div class="separator"><span>or</span></div>
+      <p class="switch">Don't have an account? <a routerLink="/register">Register</a></p>
+    </form>
+  </div>
+</div>

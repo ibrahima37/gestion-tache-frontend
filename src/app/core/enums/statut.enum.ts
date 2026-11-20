@@ -1,0 +1,7 @@
+export enum Statut{
+    EN_ATTENTE = 'EN_ATTENTE',
+    EN_COURS = 'EN_COURS',
+    EN_REVISION = 'EN_REVISION',
+    TERMINEE = 'TERMINEE',
+    REJETEE = 'REJETEE'
+}

@@ -1,0 +1,86 @@
+<div class="auth-page">
+  <div class="auth-card list-card">
+
+    <div class="avatar">
+      <i class="bi bi-tags"></i>
+    </div>
+
+    <h2 class="title">
+      <i class="bi bi-list-ul"></i> Liste des catégories
+    </h2>
+    <p class="subtitle">{{ categories.length }} catégorie(s) trouvée(s)</p>
+
+    <div class="header-actions">
+      <button class="btn-gradient" [routerLink]="['/categories/creer']">
+        <i class="bi bi-plus-circle"></i> Nouvelle catégorie
+      </button>
+    </div>
+
+    <!-- Si aucune catégorie -->
+    <div class="empty" *ngIf="categories.length === 0">
+      <i class="bi bi-inbox"></i>
+      <p>Aucune catégorie trouvée</p>
+      <span>Crée ta première catégorie pour commencer</span>
+    </div>
+
+    <!-- Tableau -->
+    <div class="table-wrap" *ngIf="categories.length > 0">
+      <table>
+        <thead>
+          <tr>
+            <th><i class="bi bi-hash"></i> ID</th>
+            <th><i class="bi bi-tag"></i> Nom Catégories</th>
+            <th><i class="bi bi-gear"></i> Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cat of categories" (click)="selectCategorie(cat.id)">
+            <td class="uuid" [title]="cat.id">
+              <span class="uuid-badge">
+                {{ cat.id | slice:0:10 }}
+              </span>
+            </td>
+            <td>
+              <div class="nom-content">
+                {{ cat.nomCategorie }}
+              </div>
+            </td>
+            <td>
+              <div class="actions-content" (click)="$event.stopPropagation()">
+                <button class="btn-view" (click)="selectCategorie(cat.id)" title="Voir">
+                  <i class="bi bi-eye"></i>
+                </button>
+                <button class="btn-delete" (click)="demanderSuppression(cat)" title="Supprimer">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+  <!-- MODALE CONFIRMATION -->
+  <div class="modal-overlay" *ngIf="showConfirm" (click)="annulerSuppression()">
+    <div class="modal-card" (click)="$event.stopPropagation()">
+      <div class="modal-icon">
+        <i class="bi bi-exclamation-triangle"></i>
+      </div>
+      <h3>Supprimer cette catégorie ?</h3>
+      <p>
+        Tu es sur le point de supprimer <b>"{{ categorieAsupprimer?.nomCategorie }}"</b>.<br>
+        Cette action est irréversible.
+      </p>
+      <div class="modal-actions">
+        <button class="btn-cancel" (click)="annulerSuppression()">
+          <i class="bi bi-x-circle"></i> Annuler
+        </button>
+        <button class="btn-confirm-delete" (click)="confirmerSuppression()">
+          <i class="bi bi-trash"></i> Oui, supprimer
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

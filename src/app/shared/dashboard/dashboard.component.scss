@@ -1,0 +1,100 @@
+// .layout {
+//     display: flex;
+//     flex-direction: column; /* Aligne les éléments verticalement */
+//     height: 100vh; /* Prend toute la hauteur de la fenêtre */
+//     padding-top: 90px; /* Espace pour la barre d'applications fixe */
+
+// }
+.menu-button {
+    position: absolute; /* Positionne le bouton en haut à gauche */
+    top: 20px; /* Espacement du haut */
+    left: 20px; /* Espacement de la gauche */
+    background-color: #007bff; /* Couleur de fond */
+    color: white; /* Couleur du texte */
+    border: none; /* Enlève la bordure */
+    padding: 10px 15px; /* Espacement interne */
+    border-radius: 5px; /* Coins arrondis */
+    cursor: pointer; /* Change le curseur pour indiquer que c'est cliquable */
+    z-index: 1000; /* Assure que le bouton est au-dessus des autres éléments */
+
+    &:hover {
+        background-color: #0056b3; /* Couleur de fond au survol */
+    }
+}
+
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+// .layout {
+//   min-height: 100vh;
+//   display: flex;
+//   flex-direction: column;
+//   background:
+//     radial-gradient(circle at 20% 20%, #7c3aed 0%, transparent 45%),
+//     radial-gradient(circle at 85% 80%, #db2777 0%, transparent 40%),
+//     linear-gradient(135deg, #020617 0%, #1e1b4b 45%, #0c4a6e 100%);
+//   font-family: 'Segoe UI', sans-serif;
+//   color: #fff;
+// }
+
+// ===== APPBAR =====
+// ton app-appbar est déjà stylé, on lui assure juste qu'il reste en haut
+app-appbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: block;
+}
+
+// ===== CONTENU CENTRAL =====
+.content {
+  flex: 1;
+  width: 100%;
+  max-width: 1250px;
+  margin: 0 auto;
+  padding: 24px 20px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  // le composant liste prend toute la largeur
+  app-liste-tache {
+    display: block;
+    width: 100%;
+  }
+}
+
+// ===== FOOTER =====
+footer {
+  padding: 18px 20px;
+  text-align: center;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.05);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(18px);
+
+  // si tu mets du texte dedans plus tard
+  p {
+    margin: 0;
+  }
+
+  a {
+    color: #e879f9;
+    text-decoration: none;
+    font-weight: 600;
+
+    &:hover {
+      color: #fff;
+    }
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .content {
+    padding: 12px 12px 30px;
+  }
+}

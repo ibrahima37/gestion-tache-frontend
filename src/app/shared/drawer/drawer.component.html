@@ -1,0 +1,72 @@
+<aside class="drawer">
+  <div class="logo">
+    <img src="assets/info.jpeg" alt="Logo"/> 
+  </div>
+  <div class="drawer-header">
+    <h3>Menu</h3>
+    <button (click)="close.emit()">✕</button>
+  </div>
+
+  <nav>
+    <a (click)="navigateTo('/dashboard')">
+      <i class="bi bi-speedometer2"></i> Dashboard
+    </a>
+
+    <!-- Catégories -->
+    <div class="menu-group">
+      <a (click)="toggleDropdown('categories')">
+        <i class="bi bi-tags"></i> Catégories
+        <span class="arrow">{{ isDropdownOpen['categories'] ? '▲' : '▼' }}</span>
+      </a>
+      <div class="submenu" *ngIf="isDropdownOpen['categories']">
+        <a (click)="navigateTo('/categories/liste')"><i class="bi bi-list-task"></i> Liste catégories</a>
+        <a (click)="navigateTo('/categories/creer')"><i class="bi bi-plus-circle"></i>Ajouter catégorie</a>
+      </div>
+    </div>
+
+    <!-- Tâches -->
+    <div class="menu-group">
+      <a (click)="toggleDropdown('taches')">
+        <i class="bi bi-list-task"></i> Tâches
+        <span class="arrow">{{ isDropdownOpen['taches'] ? '▲' : '▼' }}</span>
+      </a>
+      <div class="submenu" *ngIf="isDropdownOpen['taches']">
+        <a (click)="navigateTo('/taches/liste')"><i class="bi bi-list-task"></i> Liste tâches</a>
+        <a (click)="navigateTo('/taches/creer')"><i class="bi bi-plus-circle"></i> Nouvelle tâche</a>
+        <a (click)="navigateTo('/attribuer/tache')"><i class="bi bi-person-check"></i> Attribuer tâche</a>
+      </div>
+    </div>
+
+    <!-- Personnes -->
+    <div class="menu-group">
+      <a (click)="toggleDropdown('personnes')">
+        <i class="bi bi-people"></i> Personnes
+        <span class="arrow">{{ isDropdownOpen['personnes'] ? '▲' : '▼' }}</span>
+      </a>
+      <div class="submenu" *ngIf="isDropdownOpen['personnes']">
+        <a (click)="navigateTo('/personnes/liste')"><i class="bi bi-people"></i> Liste personne</a>
+      </div>
+    </div>
+
+    <!-- Profiles -->
+    <div class="menu-group">
+      <a (click)="toggleDropdown('profiles')">
+        <i class="bi bi-people"></i> Profiles
+        <span class="arrow">{{ isDropdownOpen['profiles'] ? '▲' : '▼' }}</span>
+      </a>
+      <div class="submenu" *ngIf="isDropdownOpen['profiles']">
+        <a (click)="navigateTo('/profile/liste')"><i class="bi bi-people"></i> Liste profiles</a>
+        <a (click)="navigateTo('/profile/creer')"><i class="bi bi-person-plus"></i> Ajouter profile</a>
+        <a (click)="navigateTo('/profile/profile')"><i class="bi bi-person-check"></i> Attribuer profile</a>
+      </div>
+    </div>
+
+    <a (click)="navigateTo('/settings')">
+      <i class="bi bi-gear"></i> Parametres
+    </a>
+
+    <a (click)="navigateTo('/statistiques')">
+      <i class="bi bi-bar-chart"></i> Statistiques
+    </a>
+  </nav>
+</aside>

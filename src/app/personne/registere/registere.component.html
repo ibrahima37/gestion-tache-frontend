@@ -1,0 +1,62 @@
+<div class="auth-page">
+  <div class="auth-card">
+    <div class="avatar"><span>👥</span></div>
+
+    <div class="tabs">
+      <a routerLink="/login" routerLinkActive="active">Login</a>
+      <a routerLink="/register" routerLinkActive="active">Register</a>
+    </div>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="form" novalidate>
+
+      <div class="field">
+        <span class="icon"><i class="bi bi-person"></i></span>
+        <input type="text" formControlName="nom" placeholder="Nom" />
+      </div>
+      <small class="error-text" *ngIf="registerForm.get('nom')?.invalid && registerForm.get('nom')?.touched">
+        Le nom est obligatoire
+      </small>
+
+      <div class="field">
+        <span class="icon"><i class="bi bi-person-lines-fill"></i></span>
+        <input type="text" formControlName="prenoms" placeholder="Prénoms" />
+      </div>
+      <small class="error-text" *ngIf="registerForm.get('prenoms')?.invalid && registerForm.get('prenoms')?.touched">
+        Le prénom est obligatoire
+      </small>
+
+      <div class="field">
+        <span class="icon"><i class="bi bi-envelope"></i></span>
+        <input type="email" formControlName="email" placeholder="Email" />
+      </div>
+      <small class="error-text" *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
+        <span *ngIf="registerForm.get('email')?.errors?.['required']">L'email est obligatoire</span>
+        <span *ngIf="registerForm.get('email')?.errors?.['email']">Format d'email invalide</span>
+      </small>
+
+      <div class="field">
+        <span class="icon"><i class="bi bi-telephone"></i></span>
+        <input type="text" formControlName="telephone" placeholder="Téléphone" />
+      </div>
+
+      <div class="field">
+        <span class="icon"><i class="bi bi-geo-alt"></i></span>
+        <input type="text" formControlName="adresse" placeholder="Adresse" />
+      </div>
+
+      <div class="field">
+        <span class="icon"><i class="bi bi-lock"></i></span>
+        <input type="password" formControlName="motDePasse" placeholder="Mot de passe" />
+      </div>
+      <small class="error-text" *ngIf="registerForm.get('motDePasse')?.invalid && registerForm.get('motDePasse')?.touched">
+        <span *ngIf="registerForm.get('motDePasse')?.errors?.['required']">Le mot de passe est obligatoire</span>
+        <span *ngIf="registerForm.get('motDePasse')?.errors?.['pattern']">Min. 8 caractères, majuscule, minuscule et chiffre requis</span>
+      </small>
+
+      <button type="submit" class="btn-gradient" [disabled]="registerForm.invalid">Register</button>
+      <p class="error" *ngIf="error">{{ error }}</p>
+
+      <p class="switch">Already have an account? <a routerLink="/login">Login</a></p>
+    </form>
+  </div>
+</div>

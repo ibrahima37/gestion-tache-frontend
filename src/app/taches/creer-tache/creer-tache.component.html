@@ -1,0 +1,97 @@
+<div class="auth-page">
+  <div class="auth-card">
+
+    <div class="avatar">
+      <i class="bi bi-check2-square"></i>
+    </div>
+
+    <h2 class="title">
+      <i class="bi bi-plus-circle"></i> Créer une Tâche
+    </h2>
+    <p class="subtitle">Ajoute une nouvelle tâche à ton projet</p>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form">
+
+      <!-- TITRE -->
+      <div class="field">
+        <span class="icon"><i class="bi bi-pencil"></i></span>
+        <input type="text" formControlName="titre" placeholder="Titre de la tâche" />
+      </div>
+      <div *ngIf="form.get('titre')?.invalid && form.get('titre')?.touched" class="error">
+        <i class="bi bi-exclamation-circle"></i> Le titre est requis.
+      </div>
+
+      <!-- DESCRIPTION -->
+      <div class="field">
+        <span class="icon"><i class="bi bi-card-text"></i></span>
+        <textarea formControlName="description" placeholder="Description..." rows="2"></textarea>
+      </div>
+
+      <!-- CATEGORIE - LA LISTE -->
+      <div class="field">
+        <span class="icon"><i class="bi bi-tags"></i></span>
+        <select formControlName="categorieId">
+          <option value="" disabled>Choisir une catégorie</option>
+          <option *ngFor="let cat of categories" [value]="cat.id">
+            {{ cat.nomCategorie }}
+          </option>
+        </select>
+      </div>
+      <div *ngIf="form.get('categorieId')?.invalid && form.get('categorieId')?.touched" class="error">
+        <i class="bi bi-exclamation-circle"></i> Choisis une catégorie.
+      </div>
+
+      <!-- STATUT -->
+      <div class="field">
+          <span class="icon"><i class="bi bi-flag"></i></span>
+          <select formControlName="statut">
+            <option *ngFor="let s of statuts" [value]="s">{{ s }}</option>
+          </select>
+      </div>
+
+      <!-- PRIORITE + TYPE -->
+      <div class="row">
+        <div class="field">
+          <span class="icon"><i class="bi bi-flag"></i></span>
+          <select formControlName="priorite">
+            <option *ngFor="let p of priorites" [value]="p">{{ p }}</option>
+          </select>
+        </div>
+        <div class="field">
+          <span class="icon"><i class="bi bi-layers"></i></span>
+          <select formControlName="typeTache">
+            <option *ngFor="let t of typeTaches" [value]="t">{{ t }}</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- DATES -->
+      <div class="row">
+        <div class="field">
+          <span class="icon"><i class="bi bi-calendar-event"></i></span>
+          <input type="datetime-local" formControlName="dateDebut" />
+        </div>
+        <div class="field">
+          <span class="icon"><i class="bi bi-calendar-check"></i></span>
+          <input type="datetime-local" formControlName="dateFin" />
+        </div>
+      </div>
+
+      <!-- ASSIGNED ID (optionnel) -->
+      <div class="field">
+        <span class="icon"><i class="bi bi-person"></i></span>
+        <input type="text" formControlName="assignedId" placeholder="ID assigné (optionnel)" />
+      </div>
+
+      <button type="submit" class="btn-gradient" [disabled]="form.invalid">
+        <i class="bi bi-check-circle"></i> Créer la tâche
+      </button>
+
+      <button type="button" class="btn-cancel" (click)="form.reset()">
+        <i class="bi bi-arrow-counterclockwise"></i> Annuler
+      </button>
+
+    </form>
+
+  </div>
+</div>

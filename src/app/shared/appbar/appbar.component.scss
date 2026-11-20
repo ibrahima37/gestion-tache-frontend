@@ -1,0 +1,149 @@
+.appbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  background: linear-gradient(90deg, #020617, #1e1b4b, #0c4a6e);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(18px);
+  color: #fff;
+  font-family: 'Segoe UI', sans-serif;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  //ajout
+  .left, .right {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .right {
+    justify-content: flex-end;
+  }
+
+  .title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    font-size: 19px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    white-space: nowrap;
+    background: linear-gradient(90deg, #22d3ee, #a855f7, #ec4899);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .menu-button {
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(0, 0, 0, 0.25);
+    color: #fff;
+    padding: 9px 16px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.2s;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+  }
+
+  .username {
+    font-size: 14px;
+    font-weight: 600;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: rgba(168, 85, 247, 0.15);
+    border: 1px solid rgba(168, 85, 247, 0.4);
+    color: #ddd6fe;
+    white-space: nowrap;
+    max-width: 220px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .logout-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    background: rgba(244, 63, 94, 0.25);
+    color: #fff;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.15s;
+
+    &:hover { transform: scale(1.1); }
+  }
+
+  left: 0; 
+  right: 0; 
+  padding: 10px 20px; 
+
+  h1 { font-size: 18px; margin: 0; letter-spacing: 1px; }
+}
+
+// .left, .right { display: flex; align-items: center; gap: 15px; }
+
+// .menu-button {
+//   background: rgba(255,255,255,0.12);
+//   border: 1px solid rgba(255,255,255,0.25);
+//   color: #fff;
+//   padding: 8px 14px;
+//   border-radius: 8px;
+//   cursor: pointer;
+//   font-size: 15px;
+
+//   &:hover { background: rgba(255,255,255,0.25); }
+// }
+
+// .username { font-weight: 600; }
+
+// .logout-btn {
+//   background: transparent;
+//   border: none;
+//   color: #fff;
+//   font-size: 20px;
+//   cursor: pointer;
+// }
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 6, 23, 0.7);
+  backdrop-filter: blur(4px);
+  z-index: 199;
+}
+
+app-drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  z-index: 1000;
+}
+
+@media (max-width: 768px) {
+  .appbar .title {
+    font-size: 13px;
+    letter-spacing: 0.5px;
+  }
+  .appbar .username {
+    display: none; // ou garde-le si tu veux
+  }
+}
+
+.content { padding: 20px; }

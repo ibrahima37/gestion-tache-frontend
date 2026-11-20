@@ -1,0 +1,39 @@
+<div class="auth-page">
+  <div class="auth-card">
+
+    <div class="avatar">
+      <i class="bi bi-tags"></i>
+    </div>
+
+    <h2 class="title">
+      <i class="bi bi-plus-circle"></i> Créer une Catégorie
+    </h2>
+    <p class="subtitle">Ajoute une nouvelle catégorie à ton projet</p>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form">
+
+      <div class="field">
+        <span class="icon"><i class="bi bi-tag"></i></span>
+        <input 
+          type="text" 
+          id="nomCategorie" 
+          formControlName="nomCategorie" 
+          placeholder="Nom de la catégorie" />
+      </div>
+
+      <div *ngIf="form.get('nomCategorie')?.invalid && (form.get('nomCategorie')?.touched || form.get('nomCategorie')?.dirty)" class="error">
+        <i class="bi bi-exclamation-circle"></i> Le nom de la catégorie est requis.
+      </div>
+
+      <button type="submit" class="btn-gradient" [disabled]="form.invalid">
+        <i class="bi bi-check-circle"></i> Créer la catégorie
+      </button>
+
+      <button type="button" class="btn-cancel" (click)="form.reset()">
+        <i class="bi bi-arrow-counterclockwise"></i> Annuler
+      </button>
+
+    </form>
+
+  </div>
+</div>
